@@ -27,7 +27,7 @@ public class ActiveCodeController {
 		if(pageIndex!=null){
 			index = Integer.valueOf(pageIndex);
 		}
-		PageBean<LzActivecode> pb = activeCodeSer.findActiveCodePage(index, 5, "select * from lz_activecode where 1=1 order by createtime desc");
+		PageBean<LzActivecode> pb = activeCodeSer.findActiveCodePage(index, 20, "select * from lz_activecode where 1=1 order by createtime desc");
 		model.put("pb", pb);
 		return "activeCodeList";
 	}

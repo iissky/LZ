@@ -39,6 +39,8 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
+                    
+                    <!-- 
                         <div class="layui-card-body ">
                             <form action="" method="post" class="layui-form layui-col-space5">
                                 <div class="layui-inline layui-show-xs-block">
@@ -55,6 +57,8 @@
                                 </div>
                             </form>
                         </div>
+                         -->
+                        
                         <div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
@@ -69,7 +73,8 @@
                                     <th>全网权重数</th>
                                     <th>产生时间</th>
                                     <th>状态</th>
-                                    <th>操作</th></tr>
+<!--                                     <th>操作</th> -->
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${pb.list }" var="game">
@@ -83,6 +88,7 @@
                                     	<c:if test="${game.status=='1'}">进行中</c:if>
                                     	<c:if test="${game.status=='2'}">已结束</c:if>
                                     </td>
+                                    <!-- 
                                     <td class="td-manage">
                                       <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
@@ -91,6 +97,7 @@
                                         <i class="layui-icon">&#xe640;</i>
                                       </a>
                                     </td>
+                                     -->
                                   </tr>
                                   </c:forEach>
                                 </tbody>

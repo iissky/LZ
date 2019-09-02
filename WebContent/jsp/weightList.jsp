@@ -39,6 +39,8 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
+                    
+                    <!-- 
                         <div class="layui-card-body ">
                             <form action="userListPage" method="post" class="layui-form layui-col-space5">
                                 <div class="layui-inline layui-show-xs-block">
@@ -55,6 +57,7 @@
                                 </div>
                             </form>
                         </div>
+                         -->
                         <div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('开放新轮次','jsp/addWeight.jsp',600,400)"><i class="layui-icon"></i>新增新轮次</button>
                         </div>

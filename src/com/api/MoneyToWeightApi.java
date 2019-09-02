@@ -81,6 +81,11 @@ public class MoneyToWeightApi {
 	@RequestMapping(value="/moneyToWeight")
 	public @ResponseBody MoneyToWeightJson moneyToWeight(String userPhone,BigDecimal money,BigDecimal weight,int weightSetId){
 		MoneyToWeightJson mwj = new MoneyToWeightJson();
+		if(money.signum()==-1||weight.signum()==-1){
+			mwj.setResultCode("4004");
+			mwj.setResultMess("钱币和权重不能为负数");
+			return mwj;
+		}
 		try {
 			//查询用户信息
 			LzUserinfo user = userSer.findUserByPhone(userPhone);

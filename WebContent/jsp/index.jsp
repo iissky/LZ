@@ -117,6 +117,7 @@
                             </li>
                         </ul>
                     </li>
+                    <!-- 
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="资讯管理">&#xe726;</i>
@@ -130,6 +131,8 @@
                             </li>
                         </ul>
                     </li>
+                     -->
+                    <!-- 
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="统计查看">&#xe6ce;</i>
@@ -148,6 +151,9 @@
                             </li>
                         </ul>
                     </li>
+                     -->
+                    
+                    <!-- 
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="其它页面">&#xe6b4;</i>
@@ -176,6 +182,8 @@
                             </li>
                         </ul>
                     </li>
+                     -->
+                    
                 </ul>
             </div>
         </div>

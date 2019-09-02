@@ -135,6 +135,11 @@ public class DialsetApi {
 	@RequestMapping("/dialWeightOrder")
 	public @ResponseBody BaseJson dialWeightOrder(String userPhone, BigDecimal weight) {
 		BaseJson bj = new BaseJson();
+		if(weight.signum()==-1){
+			bj.setResultCode("4002");
+			bj.setResultMess("权重不能为负数");
+			return bj;
+		}
 		int num = weightSer.dialWeightOrder(userPhone, weight);
 		if (num == 1) {// 成功
 			bj.setResultCode("1001");
@@ -156,6 +161,11 @@ public class DialsetApi {
 	@RequestMapping("/dialMoneyOrder")
 	public @ResponseBody BaseJson dialMoneyOrder(String userPhone, BigDecimal money) {
 		BaseJson bj = new BaseJson();
+		if(money.signum()==-1){
+			bj.setResultCode("4002");
+			bj.setResultMess("钱币不能为负数");
+			return bj;
+		}
 		int num = moneySer.dialMoneyOrder(userPhone, money);
 		if (num == 1) {// 成功
 			bj.setResultCode("1001");

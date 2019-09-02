@@ -18,7 +18,7 @@ public class GameRoundSchedul {
 	}
 
 //	@Scheduled(cron="0 */18 * * * ?")
-	@Scheduled(fixedRate=1000*60*18)
+	@Scheduled(fixedRate=1000*60*36)
 //	@Scheduled(cron="0/15 * * * * ?")
 	public void gameRound(){
 		System.out.println("执行游戏轮次"+new Date());

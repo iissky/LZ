@@ -34,7 +34,7 @@ public class GameRoundController {
 		if(pageIndex!=null){
 			index = Integer.valueOf(pageIndex);
 		}
-		PageBean<LzGameround> pb = gameSer.findGameRoundByPage(index, 5, "select * from lz_gameround where 1=1 order by createtime desc");
+		PageBean<LzGameround> pb = gameSer.findGameRoundByPage(index, 20, "select * from lz_gameround where 1=1 order by createtime desc");
 		model.put("pb", pb);
 		return "gameRoundList";
 	}

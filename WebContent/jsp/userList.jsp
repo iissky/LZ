@@ -42,7 +42,7 @@
                         <div class="layui-card-body ">
                             <form action="userListPage" method="post" class="layui-form layui-col-space5">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                                    <input type="text" name="userPhone"  placeholder="请输入手机号" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" type="submit"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -74,9 +74,10 @@
                                     <td>${user.weight }</td>
                                     <td><fmt:formatDate value="${user.createtime }" pattern="yyyy-mm-dd"/></td>
                                     <td class="td-manage">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
+                                    
+<!--                                       <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;"> -->
+<!--                                         <i class="layui-icon">&#xe642;</i> -->
+<!--                                       </a> -->
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
                                       </a>

@@ -26,6 +26,11 @@ public class GameApi {
 		this.grSer = grSer;
 	}
 
+	/**
+	 * 获取游戏轮次信息
+	 * @param userPhone
+	 * @return
+	 */
 	@RequestMapping(value="/getGameRound")
 	public @ResponseBody GameRoundJson getGameRound(String userPhone){
 		GameRoundJson grj = new GameRoundJson();
@@ -47,7 +52,7 @@ public class GameApi {
 		return grj;
 	}
 	/**
-	 * 
+	 * 点击漂流瓶
 		userPhone:手机号
 		moneyid:游戏漂流瓶轮次
 	 * @return

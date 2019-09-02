@@ -31,7 +31,7 @@ public class WeightController {
 		if(pageIndex!=null){
 			index = Integer.valueOf(pageIndex);
 		}
-		PageBean<LzWeightset> pb = weightSer.findWeightPage(index, 5, "select * from lz_weightSet where 1=1 order by createtime desc");
+		PageBean<LzWeightset> pb = weightSer.findWeightPage(index, 20, "select * from lz_weightSet where 1=1 order by createtime desc");
 		model.put("pb",pb);
 		return "weightList";
 	}

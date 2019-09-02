@@ -33,9 +33,9 @@
 <!--      <table schema="LZ" tableName="lz_weightaccount" enableCountByExample="false" enableUpdateByExample="false" -->
 <!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
 <!--                 selectByExampleQueryId="false"/>  -->
-		  <table schema="LZ" tableName="LZ_userGameRecord" enableCountByExample="false" enableUpdateByExample="false"
-                enableDeleteByExample="false" enableSelectByExample="false"
-                selectByExampleQueryId="false"/> 
+<!-- 		  <table schema="LZ" tableName="LZ_userGameRecord" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>  -->
 <!--      <table schema="LZ" tableName="lz_weightset" enableCountByExample="false" enableUpdateByExample="false" -->
 <!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
 <!--                 selectByExampleQueryId="false"/>  -->
@@ -48,5 +48,17 @@
 <!-- 		<table schema="LZ" tableName="LZ_authCode" enableCountByExample="false" enableUpdateByExample="false" -->
 <!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
 <!--                 selectByExampleQueryId="false"/> -->
+<!-- 	<table schema="LZ" tableName="lz_friendlist" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--     <table schema="LZ" tableName="lz_friendapply" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>  -->
+        <table schema="LZ" tableName="lz_redpackage" enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false"/>
+        <table schema="LZ" tableName="lz_redpackagedetail" enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false"/>     
   </context>
 </generatorConfiguration>

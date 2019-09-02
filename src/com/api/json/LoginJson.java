@@ -6,12 +6,21 @@ import java.util.List;
 public class LoginJson {
 	String resultCode;
 	String resultMess;
+	String userCode;
 	String userPhone;
 	BigDecimal balance;
 	BigDecimal weight;
+	String picpath;
 	List<String> activeCodeList;
 	
 	
+	
+	public String getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
 	public String getResultMess() {
 		return resultMess;
 	}
@@ -41,6 +50,12 @@ public class LoginJson {
 	}
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
+	}
+	public String getPicpath() {
+		return picpath;
+	}
+	public void setPicpath(String picpath) {
+		this.picpath = picpath;
 	}
 	public List<String> getActiveCodeList() {
 		return activeCodeList;

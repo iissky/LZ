@@ -21,6 +21,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
@@ -46,7 +47,9 @@ public class Config {
 		configurer.setLocations(new ClassPathResource("jdbc.properties"));
 		return configurer;
 	}
-
+	
+	
+	
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactoryBean() {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

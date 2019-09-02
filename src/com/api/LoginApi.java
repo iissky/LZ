@@ -1,6 +1,10 @@
 package com.api;
 
+import java.beans.Encoder;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Base64.Decoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.api.json.BaseJson;
 import com.api.json.LoginJson;
+import com.dao.LzUserinfoMapper;
 import com.pojo.LzActivecode;
 import com.pojo.LzUserinfo;
 import com.service.IActiveCodeService;
@@ -30,6 +36,8 @@ public class LoginApi {
 	IUserService userSer;
 	@Autowired
 	IActiveCodeService codeSer;
+	@Autowired
+	LzUserinfoMapper userMapper;
 	
 	public void setCodeSer(IActiveCodeService codeSer) {
 		this.codeSer = codeSer;
@@ -68,11 +76,28 @@ public class LoginApi {
 			lj.setActiveCodeList(activeCodeList);
 		}
 		
+		lj.setUserCode(user.getUsercode());
 		lj.setUserPhone(userPhone);
 		lj.setBalance(user.getBalance());
 		lj.setWeight(user.getWeight());
+		lj.setPicpath(user.getPicpath());
 		lj.setResultCode("1001");
 		lj.setResultMess("成功");
 		return lj;
+	}
+	@RequestMapping("/updateNickName")
+	public @ResponseBody BaseJson updateNickName(String userPhone,String nickName){
+		BaseJson bj = new BaseJson();
+		try{
+			userMapper.updateUsername(userPhone, nickName);
+			bj.setResultCode("1001");
+			bj.setResultMess("成功");
+			return bj;
+		}catch (Exception e) {
+			e.printStackTrace();
+			bj.setResultCode("4001");
+			bj.setResultMess("失败");
+			return bj;
+		}
 	}
 }

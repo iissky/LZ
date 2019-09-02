@@ -20,13 +20,17 @@ public class UserController {
 	}
 
 	@RequestMapping("/userListPage")
-	public ModelAndView userListPage(String pageIndex,String username){
+	public ModelAndView userListPage(String pageIndex,String userPhone){
 		ModelAndView mav = new ModelAndView();
 		int index = 1;
 		if(pageIndex!=null){
 			index = Integer.valueOf(pageIndex);
 		}
-		PageBean<LzUserinfo> pb = userSer.findAllUserPage(index, 5, "select * from lz_userinfo where 1=1 ");
+		String sql = "select * from lz_userinfo where 1=1";
+		if(userPhone!=null&&!"".equals(userPhone)){
+			sql = "select * from lz_userinfo where 1=1 and phone='"+userPhone+"'";
+		}
+		PageBean<LzUserinfo> pb = userSer.findAllUserPage(index, 20, sql);
 		mav.addObject("pb", pb);
 		mav.setViewName("userList");
 		return mav;

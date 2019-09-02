@@ -17,4 +17,6 @@ public interface IUserService {
 	public LzUserinfo loginAuth(String phone,String pwd);
 	
 	public int modifierPassword(String phone,String pwd);
+	
+	public int modifierUser(LzUserinfo user);
 }

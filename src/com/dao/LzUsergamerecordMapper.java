@@ -13,7 +13,7 @@ public interface LzUsergamerecordMapper {
 	@Select("${sql}")
 	public List<LzUsergamerecord> selectBySql(@Param("sql") String sql);
 	
-	@Select("select * from lz_usergamerecord where status='1' and phone=#{phone} and Createtime>ADDDATE(NOW(),INTERVAL -48 HOUR)")
+	@Select("select * from lz_usergamerecord where status='1' and phone=#{phone} and Createtime>ADDDATE(NOW(),INTERVAL -48 HOUR) limit 0,40")
 	public List<LzUsergamerecord> getUncollectMoney(@Param("phone") String phone);
 	
 	/**
