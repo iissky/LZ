@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/lz" driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+    <javaModelGenerator targetPackage="com.pojo" targetProject="LZ" />
+    <sqlMapGenerator targetPackage="com.mapper" targetProject="LZ" />
+    <javaClientGenerator targetPackage="com.dao" targetProject="LZ" type="XMLMAPPER" />
+<!--     <table schema="LZ" tableName="lz_account" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--     <table schema="LZ" tableName="lz_activecode" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--     <table schema="LZ" tableName="lz_dayaccount" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--      <table schema="LZ" tableName="lz_dealorder" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--      <table schema="LZ" tableName="lz_dialset" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--      <table schema="LZ" tableName="lz_gamecount" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--      <table schema="LZ" tableName="lz_message" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--      <table schema="LZ" tableName="lz_userinfo" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>         -->
+<!--      <table schema="LZ" tableName="lz_weightaccount" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>  -->
+<!-- 		  <table schema="LZ" tableName="LZ_userGameRecord" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>  -->
+<!--      <table schema="LZ" tableName="lz_weightset" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>  -->
+<!--      <table schema="LZ" tableName="lz_manager" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>     -->
+<!--           <table schema="LZ" tableName="lz_gameRound" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>             -->
+<!-- 		<table schema="LZ" tableName="LZ_authCode" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!-- 	<table schema="LZ" tableName="lz_friendlist" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
+<!--     <table schema="LZ" tableName="lz_friendapply" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/>  -->
+        <table schema="LZ" tableName="lz_redpackage" enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false"/>
+        <table schema="LZ" tableName="lz_redpackagedetail" enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false"/>     
+  </context>
+</generatorConfiguration>
