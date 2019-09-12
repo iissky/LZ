@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body onload="init()">
+	<h3 id="h1"></h3>
+	
+</body>
+<script type="text/javascript">
+function init(){
+	var code = window.location.href.substr(window.location.href.indexOf("=")+1);
+	
+	if(code=='1001'){
+		document.getElementById("h1").innerHTML="恭喜注册成功！请下载APP登录！";
+	}else if('4002'){
+		document.getElementById("h1").innerHTML="验证码错误或者超过三分钟！";
+	}else if('4003'){
+		document.getElementById("h1").innerHTML="手机号被占用！";
+	}else if('4004'){
+		document.getElementById("h1").innerHTML="注册失败，请联系管理员！";
+	}else{
+		document.getElementById("h1").innerHTML="注册失败，请联系管理员！";
+	}
+}
+</script>
+</html>

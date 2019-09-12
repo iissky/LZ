@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="email=no">
+		<meta name="format-detection" content="address=no;">
+		<meta name="keywords">
+		<meta name="description">
+		<link rel="stylesheet" type="text/css" href="css/lawyerregister_7257b38.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+	</head>
+<style>
+	.disable{
+        pointer-events:none;
+        color:#666;
+    }
+</style>
+<script>
+	function getQueryVariable(variable)
+	{
+	       var query = window.location.search.substring(1);
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == variable){return pair[1];}
+	       }
+	       return(false);
+	}
+	function register() {
+		var usercode = getQueryVariable("usercode");
+		var reg = /^\d{11}$/;
+			
+		if(document.getElementById("phone").value==""){
+			document.getElementById("phone").placeholder="手机号不能为空";
+			return ;
+		}
+		if(!reg.test(document.getElementById("phone").value)){
+			document.getElementById("phone").value="";
+			document.getElementById("phone").placeholder="无效手机号";
+			return ;
+		}
+		if(document.getElementById("smsCode").value==""){
+			document.getElementById("smsCode").placeholder="验证码不能为空";
+			return ;
+		}
+		if(document.getElementById("pwd1").value==""){
+			document.getElementById("pwd1").placeholder="密码不能为空";
+			return ;
+		}
+		var reg2 = /^[0-9a-zA-Z]{4,12}$/;
+		if(!reg2.test(document.getElementById("pwd1").value)){
+			document.getElementById("pwd1").value="";
+			document.getElementById("pwd1").placeholder="密码无效";
+			return ;
+		}
+		if(document.getElementById("pwd1").value!=document.getElementById("pwd2").value){
+			document.getElementById("pwd2").value="";
+			document.getElementById("pwd2").placeholder="确认密码不正确";
+			return ;
+		}
+		
+		var phone = document.getElementById("phone").value;
+		var smsCode = document.getElementById("smsCode").value;
+		var password = document.getElementById("pwd1").value;
+		usercode = usercode.replace("#", "");
+		$.ajax({
+			url:"inviteRegisterFinish",
+			data:{userPhone:phone,authCode:smsCode,pwd:password,inviteUserCode:usercode},
+			success:function(data){
+				window.location.href="success.jsp?resultCode="+data.resultCode;
+			}
+		});
+		document.getElementById("btnRegister").removeAttribute("onclick");
+	}
+	
+	
+</script>
+	<body class="body-box">
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-pull-left mui-pull-home">链主好友邀请注册</span>
+			</header>
+		<div class="mui-content">
+			<div class="register">
+				<ul class="reg-list">
+					<li class="r-input-nr"><input name="phone" id="phone" placeholder="请输入手机号" class="input-text btn btn-gy-line" type="tel">
+						<a href="#" id="btnSendVerify" class="r-btn btn-gn btn-gy">发送验证码</a>
+					</li>
+					<li><input name="vcode" id="smsCode" placeholder="请填写验证码" class="input-text btn btn-gy-line" type="text"></li>
+					<li><input name="pwd" id="pwd1" placeholder="请输入密码（4-12位字母或数字）" class="input-text btn btn-gy-line" type="password"></li>
+					<li><input name="pwd" id="pwd2" placeholder="确认密码" class="input-text btn btn-gy-line" type="password"></li>
+					<li><button type="button" id="btnRegister" class="mui-btn mui-btn-block btn-gn" onclick="register()">注册</button></li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+
+<script type="text/javascript">
+        var oBtn = document.getElementById('btnSendVerify');
+        var flag = true;
+		
+        oBtn.addEventListener("click", function () {
+        	var phone = document.getElementById("phone").value;
+    		
+    		var reg = /^\d{11}$/;
+    		
+    		if(document.getElementById("phone").value==""){
+    			document.getElementById("phone").placeholder="手机号不能为空";
+    			return ;
+    		}
+    		if(!reg.test(document.getElementById("phone").value)){
+    			document.getElementById("phone").value="";
+    			document.getElementById("phone").placeholder="无效手机号";
+    			return ;
+    		}
+        	
+            var time = 60;
+            oBtn.classList.add('disable');
+			$.ajax({
+				url:"getAuthCode",
+				dataType:"json",
+				data:{userPhone:phone,authid:"I0Vt194Iq5PB"},
+				success:function(data){
+					if(data.resultCode=='4003'){
+						oBtn.innerText = '已占用重新获取';
+                        oBtn.classList.remove('disable');
+						flag = false;
+						return;
+					}
+					oBtn.innerText = '已发送';
+					var timer = setInterval(() => {
+	                    time--;
+	                    oBtn.innerText = time + ' 秒';
+	                    if (time === 0) {
+	                        clearInterval(timer);
+	                        oBtn.innerText = '重新获取';
+	                        oBtn.classList.remove('disable');
+	                        flag = true;
+	                    }
+	                }, 1000)
+				}
+			});
+        });
+
+    </script>
+</html>
