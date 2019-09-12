@@ -3,8 +3,8 @@
   <display-name>LZ</display-name>
   <context-param>
   	<param-name>basePath</param-name>
-<!--   	<param-value>http://39.106.226.254/</param-value> -->
-		<param-value>http://localhost:8888/LZ/</param-value>
+  	<param-value>http://39.106.226.254/</param-value>
+<!-- 	<param-value>http://localhost:8888/LZ/</param-value> -->
 <!-- 	<param-value>http://localhost:80/</param-value> -->
   </context-param>
   <filter>

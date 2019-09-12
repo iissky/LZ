@@ -9,7 +9,10 @@ import org.apache.ibatis.annotations.*;
 import com.pojo.LzUserinfo;
 
 public interface LzUserinfoMapper {
-	@Update("update lz_userinfo set username = #{username} where phone=#{phone}")
+	@Select("select * from lz_userinfo where phone=#{phone}")
+	public LzUserinfo selectUserByPhone(@Param("phone")String phone);
+	
+	@Update("update lz_userinfo set nickname = #{username} where phone=#{phone}")
 	public int updateUsername(@Param("phone")String phone,@Param("username")String username);
 
 	@Update("update lz_userinfo set balance = balance+#{money} where phone=#{phone}")

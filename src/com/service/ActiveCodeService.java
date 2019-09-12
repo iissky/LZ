@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,17 @@ public class ActiveCodeService implements IActiveCodeService{
 		la.setBindphone(bindPhone);
 		la.setStatus("1");
 		la.setCreatetype("2");
+		la.setCreatetime(new Date());
+		return activeMapper.insert(la);
+	}
+	
+	@Override
+	public int createInviteActiveCode(String bindPhone) {
+		LzActivecode la = new LzActivecode();
+		la.setActivecode(UUID.randomUUID().toString().replace("-", "").substring(0, 20));
+		la.setBindphone(bindPhone);
+		la.setStatus("1");
+		la.setCreatetype("1");
 		la.setCreatetime(new Date());
 		return activeMapper.insert(la);
 	}

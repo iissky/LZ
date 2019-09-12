@@ -46,9 +46,9 @@ public class FriendApi {
 		try{
 			FriendJson fj = new FriendJson();
 			//查询好友列表
-			List<Map<String, Object>> list = friendListMapper.findMapBysql("select b.Phone,b.username,b.picpath,a.friendusercode from lz_friendlist a,lz_userinfo b where a.friendphone=b.Phone and a.userphone='"+userPhone+"'");
+			List<Map<String, Object>> list = friendListMapper.findMapBysql("select b.Phone,b.nickname,b.picpath,a.friendusercode from lz_friendlist a,lz_userinfo b where a.friendphone=b.Phone and a.userphone='"+userPhone+"'");
 			//查询好友申请数量
-			List<Map<String, Object>> applylist = friendapplyMapper.findMapBysql("select count(faid) count from lz_friendapply where userphone='"+userPhone+"' and status='0'");
+			List<Map<String, Object>> applylist = friendapplyMapper.findMapBysql("select count(faid) count from lz_friendapply where friendphone='"+userPhone+"' and status='0'");
 			fj.setFriendApplyCount((long)applylist.get(0).get("count"));
 			fj.setResultCode("1001");
 			fj.setResultMess("成功");
@@ -56,7 +56,7 @@ public class FriendApi {
 			for (Map<String, Object> map : list) {
 				FriendBean fb = new FriendBean();
 				fb.setFriendPhone((String)map.get("Phone"));
-				fb.setNickName((String)map.get("username"));
+				fb.setNickName((String)map.get("nickname"));
 				fb.setPicpath((String)map.get("picpath"));
 				fb.setUsercode((String)map.get("friendusercode"));
 				flist.add(fb);
@@ -93,7 +93,7 @@ public class FriendApi {
 				map.put("resultCode", "1001");
 				map.put("resultMess", "成功");
 				map.put("userphone", user.getPhone());
-				map.put("nickName", user.getUsername());
+				map.put("nickName", user.getNickname());
 				map.put("usercode", user.getUsercode());
 				map.put("picpath", user.getPicpath());
 			}
@@ -117,24 +117,38 @@ public class FriendApi {
 	@RequestMapping("/friendApply")
 	public @ResponseBody BaseJson friendApply(String userPhone,String friendUserCode){
 		BaseJson bj = new BaseJson();
-		LzFriendapply lfa = new LzFriendapply();
-		lfa.setUserphone(userPhone);
-		List<LzUserinfo> userlist = userMapper.selectBySql("select * from lz_userinfo where phone='"+userPhone+"'");
-		if(userlist!=null&&userlist.size()>0){
-			lfa.setUsercode(userlist.get(0).getUsercode());
+		try{
+			//查询是否已经有申请
+			List<Map<String ,Object>> applist = friendapplyMapper.findMapBysql("select * from lz_friendapply where userphone='"+userPhone+"' and friendusercode='"+friendUserCode+"' and status='0'");
+			if(applist!=null&&applist.size()>0){
+				//不做处理直接返回成功
+			}else{
+				LzFriendapply lfa = new LzFriendapply();
+				lfa.setUserphone(userPhone);
+				List<LzUserinfo> userlist = userMapper.selectBySql("select * from lz_userinfo where phone='"+userPhone+"'");
+				if(userlist!=null&&userlist.size()>0){
+					lfa.setUsercode(userlist.get(0).getUsercode());
+				}
+				
+				List<LzUserinfo> friendlist = userMapper.selectBySql("select * from lz_userinfo where usercode='"+friendUserCode+"'");
+				if(friendlist!=null&&friendlist.size()>0){
+					lfa.setFriendphone(friendlist.get(0).getPhone());
+					lfa.setFriendusercode(friendUserCode);
+				}
+				lfa.setApplytime(new Date());
+				lfa.setStatus("0");
+				friendapplyMapper.insert(lfa);
+			}
+			
+			bj.setResultCode("1001");
+			bj.setResultMess("成功");
+			return bj;
+		}catch (Exception e) {
+			e.printStackTrace();
+			bj.setResultCode("4001");
+			bj.setResultMess("未知错误");
+			return bj;
 		}
-		
-		List<LzUserinfo> friendlist = userMapper.selectBySql("select * from lz_userinfo where usercode='"+friendUserCode+"'");
-		if(friendlist!=null&&friendlist.size()>0){
-			lfa.setFriendphone(friendlist.get(0).getPhone());
-			lfa.setFriendusercode(friendUserCode);
-		}
-		lfa.setApplytime(new Date());
-		lfa.setStatus("0");
-		friendapplyMapper.insert(lfa);
-		bj.setResultCode("1001");
-		bj.setResultMess("成功");
-		return bj;
 	}
 	
 	/**
@@ -146,13 +160,13 @@ public class FriendApi {
 	public @ResponseBody FriendApplyJson friendApplyList(String userPhone){
 		try{
 			FriendApplyJson faj = new FriendApplyJson();
-			List<Map<String, Object>> list = friendapplyMapper.findMapBysql("select b.Phone,b.username,b.picpath,b.usercode,a.faid from lz_friendapply a,lz_userinfo b where a.friendphone='"+userPhone+"' and a.userphone=b.Phone");
+			List<Map<String, Object>> list = friendapplyMapper.findMapBysql("select b.Phone,b.nickname,b.picpath,b.usercode,a.faid from lz_friendapply a,lz_userinfo b where a.friendphone='"+userPhone+"' and a.userphone=b.Phone and a.status='0'");
 			List<FriendBean> fbList = new ArrayList<>();
 			for (Map<String, Object> map : list) {
 				FriendBean fb = new FriendBean();
 				fb.setFaid(map.get("faid")+"");
 				fb.setFriendPhone((String)map.get("Phone"));
-				fb.setNickName((String)map.get("username"));
+				fb.setNickName((String)map.get("nickname"));
 				fb.setPicpath((String)map.get("picpath"));
 				fb.setUsercode((String)map.get("usercode"));
 				fbList.add(fb);

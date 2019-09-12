@@ -67,20 +67,21 @@ public class LoginApi {
 			lj.setResultMess("用户状态异常，冻结");
 			return lj;
 		}
-		List<LzActivecode> list = codeSer.findActiveCodeByPhone(userPhone);
-		if(list!=null&&list.size()>0){
-			List<String> activeCodeList = new ArrayList<>();
-			for (LzActivecode code : list) {
-				activeCodeList.add(code.getActivecode());
-			}
-			lj.setActiveCodeList(activeCodeList);
-		}
+//		List<LzActivecode> list = codeSer.findActiveCodeByPhone(userPhone);
+//		if(list!=null&&list.size()>0){
+//			List<String> activeCodeList = new ArrayList<>();
+//			for (LzActivecode code : list) {
+//				activeCodeList.add(code.getActivecode());
+//			}
+//			lj.setActiveCodeList(activeCodeList);
+//		}
 		
-		lj.setUserCode(user.getUsercode());
+		lj.setUsercode(user.getUsercode());
 		lj.setUserPhone(userPhone);
 		lj.setBalance(user.getBalance());
 		lj.setWeight(user.getWeight());
 		lj.setPicpath(user.getPicpath());
+		lj.setNickName(user.getNickname());
 		lj.setResultCode("1001");
 		lj.setResultMess("成功");
 		return lj;

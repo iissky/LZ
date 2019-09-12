@@ -14,6 +14,8 @@ public interface IUserService {
 	
 	public int register(String phone,String mobileId,String pwd);
 	
+	public int inviteRegister(String phone,String pwd,String inviteUserCode);
+	
 	public LzUserinfo loginAuth(String phone,String pwd);
 	
 	public int modifierPassword(String phone,String pwd);

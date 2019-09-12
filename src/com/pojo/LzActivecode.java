@@ -2,6 +2,8 @@ package com.pojo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties(value={"activeid","createtype","bindphone","usephone","createtime","usertime","status"})
 public class LzActivecode {
     private Integer activeid;
     private String createtype;

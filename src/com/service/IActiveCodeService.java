@@ -17,6 +17,13 @@ public interface IActiveCodeService {
 	public int createNewActiveCode(String activeCode,String bindPhone);
 	
 	/**
+	 * 邀请用户奖励抽奖码
+	 * @param bindPhone
+	 * @return
+	 */
+	public int createInviteActiveCode(String bindPhone);
+	
+	/**
 	 * 根据手机查看当前可用的激活码集合
 	 * @param phone
 	 * @return

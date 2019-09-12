@@ -6,8 +6,9 @@ import java.util.List;
 public class LoginJson {
 	String resultCode;
 	String resultMess;
-	String userCode;
+	String usercode;
 	String userPhone;
+	String nickName;
 	BigDecimal balance;
 	BigDecimal weight;
 	String picpath;
@@ -15,11 +16,18 @@ public class LoginJson {
 	
 	
 	
-	public String getUserCode() {
-		return userCode;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
+	public String getUsercode() {
+		return usercode;
+	}
+	public void setUsercode(String usercode) {
+		this.usercode = usercode;
 	}
 	public String getResultMess() {
 		return resultMess;

@@ -1,6 +1,7 @@
 package com.api;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +15,11 @@ import com.api.json.TotalMoneyAndWeightJson;
 import com.dao.LzDealorderMapper;
 import com.dao.LzUserinfoMapper;
 import com.dao.LzWeightaccountMapper;
+import com.pojo.LzActivecode;
 import com.pojo.LzDealorder;
 import com.pojo.LzUserinfo;
 import com.pojo.LzWeightaccount;
+import com.service.IActiveCodeService;
 
 @Controller
 public class OtherApi {
@@ -26,6 +29,8 @@ public class OtherApi {
 	LzDealorderMapper orderMapper;
 	@Autowired
 	LzWeightaccountMapper weightAccountMapper;
+	@Autowired
+	IActiveCodeService codeSer;
 	
 	public void setUserMapper(LzUserinfoMapper userMapper) {
 		this.userMapper = userMapper;
@@ -98,5 +103,27 @@ public class OtherApi {
 	public @ResponseBody List<LzWeightaccount> getUserWeightRecode(String userPhone){
 		List<LzWeightaccount> list = weightAccountMapper.selectBySql("select * from lz_weightaccount where phone='"+userPhone+"' order by dealtime desc");
 		return list;
+	}
+	
+	/**
+	 * 用户获取抽奖激活码
+	 * @param userPhone
+	 * @return
+	 */
+	@RequestMapping("/getUserActiveCode")
+	public @ResponseBody Map<String,Object> getUserActiveCode(String userPhone){
+		Map<String,Object> map = new HashMap<String, Object>();
+		try{
+			List<LzActivecode> list = codeSer.findActiveCodeByPhone(userPhone);
+			map.put("activeCodeList", list);
+			map.put("resultCode", "1001");
+			map.put("resultMess", "成功");
+			return map;
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("resultCode", "4001");
+			map.put("resultMess", "失败");
+			return map;
+		}
 	}
 }

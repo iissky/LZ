@@ -5,7 +5,7 @@
     <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/lz" driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
     <javaModelGenerator targetPackage="com.pojo" targetProject="LZ" />
     <sqlMapGenerator targetPackage="com.mapper" targetProject="LZ" />
-    <javaClientGenerator targetPackage="com.dao" targetProject="LZ" type="XMLMAPPER" />
+<!--     <javaClientGenerator targetPackage="com.dao" targetProject="LZ" type="XMLMAPPER" /> -->
 <!--     <table schema="LZ" tableName="lz_account" enableCountByExample="false" enableUpdateByExample="false" -->
 <!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
 <!--                 selectByExampleQueryId="false"/> -->
@@ -54,9 +54,9 @@
 <!--     <table schema="LZ" tableName="lz_friendapply" enableCountByExample="false" enableUpdateByExample="false" -->
 <!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
 <!--                 selectByExampleQueryId="false"/>  -->
-        <table schema="LZ" tableName="lz_redpackage" enableCountByExample="false" enableUpdateByExample="false"
-                enableDeleteByExample="false" enableSelectByExample="false"
-                selectByExampleQueryId="false"/>
+<!--         <table schema="LZ" tableName="lz_redpackage" enableCountByExample="false" enableUpdateByExample="false" -->
+<!--                 enableDeleteByExample="false" enableSelectByExample="false" -->
+<!--                 selectByExampleQueryId="false"/> -->
         <table schema="LZ" tableName="lz_redpackagedetail" enableCountByExample="false" enableUpdateByExample="false"
                 enableDeleteByExample="false" enableSelectByExample="false"
                 selectByExampleQueryId="false"/>     

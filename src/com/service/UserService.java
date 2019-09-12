@@ -9,12 +9,17 @@ import java.util.UUID;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.dao.LzActivecodeMapper;
 import com.dao.LzUserinfoMapper;
+import com.pojo.LzActivecode;
 import com.pojo.LzUserinfo;
 import com.pojo.PageBean;
 @Service
 public class UserService implements IUserService{
+	@Autowired
+	LzActivecodeMapper activeMapper;
 	@Autowired
 	LzUserinfoMapper userMapper;
 	
@@ -82,6 +87,7 @@ public class UserService implements IUserService{
 		user.setPhone(phone);
 		user.setBalance(new BigDecimal(0));
 		user.setWeight(new BigDecimal(10));
+		user.setMobileid(mobileId);
 		user.setStatus("1");
 		return userMapper.insert(user);
 	}
@@ -115,6 +121,53 @@ public class UserService implements IUserService{
 	 */
 	public int modifierUser(LzUserinfo user) {
 		return userMapper.updateByPrimaryKeySelective(user);
+	}
+
+/**
+ * 邀请注册
+ */
+	@Override
+	@Transactional
+	public int inviteRegister(String phone, String pwd,String inviteUserCode) {
+		LzUserinfo user = new LzUserinfo();
+		Random r = new Random();
+		int num = r.nextInt(2146483647)+1000000;
+		List<LzUserinfo> list = userMapper.selectBySql("select * from lz_userinfo where usercode='"+num+"'");
+		if(list!=null&&list.size()>0){//用户编号重复
+			num = r.nextInt(2146483647)+1000000;
+			list = userMapper.selectBySql("select * from lz_userinfo where usercode='"+num+"'");
+		}
+		//邀请用户奖励
+		List<LzUserinfo> inviteList = userMapper.selectBySql("select * from lz_userinfo where usercode='"+inviteUserCode+"'");
+		if(inviteList!=null&&inviteList.size()>0){
+			LzUserinfo inviteUser = inviteList.get(0);
+			if(inviteUser.getInvitenum()!=null&&inviteUser.getInvitenum()>=5){//邀请人数超过5个，奖励抽奖码一次
+				LzActivecode la = new LzActivecode();
+				la.setActivecode(UUID.randomUUID().toString().replace("-", "").substring(0, 20));
+				la.setBindphone(inviteUser.getPhone());
+				la.setStatus("1");
+				la.setCreatetype("1");
+				la.setCreatetime(new Date());
+				activeMapper.insert(la);
+			}else{//否则权重加10
+				inviteUser.setWeight(inviteUser.getWeight().add(new BigDecimal(10)));
+			}
+			if(inviteUser.getInvitenum()==null){
+				inviteUser.setInvitenum(1);
+			}else{
+				inviteUser.setInvitenum(inviteUser.getInvitenum()+1);
+			}
+			userMapper.updateByPrimaryKeySelective(inviteUser);
+		}
+		
+		user.setUsercode(num+"");
+		user.setCreatetime(new Date());
+		user.setPassword(DigestUtils.md5Hex(pwd));
+		user.setPhone(phone);
+		user.setBalance(new BigDecimal(0));
+		user.setWeight(new BigDecimal(10));
+		user.setStatus("1");
+		return userMapper.insert(user);
 	}
 	
 }

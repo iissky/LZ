@@ -16,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import com.api.json.AuthCodeJson;
+import com.api.json.User;
 import com.pojo.LzAuthcode;
 import com.pojo.LzUserinfo;
 import com.service.IAuthCodeService;
@@ -35,6 +37,8 @@ public class RegisterApi {
 	IUserService userSer;
 	@Autowired
 	IAuthCodeService codeSer;
+	@Autowired
+	RestTemplate rest;
 	
 	public void setCodeSer(IAuthCodeService codeSer) {
 		this.codeSer = codeSer;
@@ -121,7 +125,7 @@ public class RegisterApi {
 	}
 	
 	/**
-	 * 完成注册
+	 * APP端完成注册
 	 * @param userPhone
 	 * @param authCode
 	 * @param mobileId
@@ -151,6 +155,56 @@ public class RegisterApi {
 			return rj;
 		}
 		int num = userSer.register(userPhone, mobileId, pwd);
+		if(num==1){
+			rj.setResultCode("1001");//成功
+			rj.setResultMess("成功");
+			return rj;
+		}
+		rj.setResultCode("4001");//失败
+		rj.setResultMess("失败");
+		return rj;
+	}
+	
+	/**
+	 * 邀请完成注册
+	 * @param userPhone 
+	 * @param authCode 
+	 * @param pwd
+	 * @return
+	 */
+	@RequestMapping(value="/inviteRegisterFinish")
+	public @ResponseBody AuthCodeJson inviteRegisterFinish(String userPhone,String authCode,String pwd,String inviteUserCode){
+		AuthCodeJson rj = new AuthCodeJson();
+		
+		LzAuthcode la = codeSer.authCode(userPhone, authCode);
+		if(la==null){//验证码错误或者超过三分钟
+			rj.setResultCode("4002");
+			rj.setResultMess("验证码错误或者超过三分钟");
+			return rj;
+		}
+		LzUserinfo user = userSer.findUserByPhone(userPhone);
+		if(user!=null){
+			rj.setResultCode("4003");//手机号被占用
+			rj.setResultMess("手机号被占用");
+			return rj;
+		}
+		
+		//环信注册
+		try {
+			User user1 = new User();
+			user1.setUsername(userPhone);
+			user1.setPassword(userPhone);                            
+		    Object obj = rest.postForEntity("http://a1.easemob.com/1113190815243420/lzapp/users", user1, Object.class);
+			System.out.println(obj.toString());
+		} catch (Exception e) {
+			System.out.println("400错误==============="+e.getMessage());
+			e.printStackTrace();
+			rj.setResultCode("4004");//手机号被占用
+			rj.setResultMess("环信注册失败");
+			return rj;
+		}
+		
+		int num = userSer.inviteRegister(userPhone, pwd, inviteUserCode);
 		if(num==1){
 			rj.setResultCode("1001");//成功
 			rj.setResultMess("成功");
