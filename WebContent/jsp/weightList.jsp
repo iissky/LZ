@@ -23,6 +23,10 @@
     	function toPage(index) {
 			window.location.href = "weightListPage?pageIndex="+index;
 		}
+    	
+    	function dealStatus(id,status) {
+    		window.location.href = "changeWeightStatus?weightid="+id+"&status="+status;
+		}
     </script>
     <body>
         <div class="x-nav">
@@ -85,6 +89,8 @@
                                     <td>
                                     	<c:if test="${weight.status=='1' }">正常</c:if>
                                     	<c:if test="${weight.status=='2' }">已结束</c:if>
+                                    	<button onclick="dealStatus('${weight.weiid }','1')">开放</button>
+                                    	<button onclick="dealStatus('${weight.weiid }','2')">关闭</button>
                                     </td>
                                   </tr>
                                   </c:forEach>

@@ -90,9 +90,6 @@
                                     	<c:if test="${active.status=='2' }">已使用</c:if>
                                     </td>
                                     <td class="td-manage">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
                                       </a>

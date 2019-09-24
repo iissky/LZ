@@ -154,6 +154,21 @@ public class RegisterApi {
 			rj.setResultMess("该手机注册达三个上限");
 			return rj;
 		}
+		
+		//环信注册
+				try {
+					User user1 = new User();
+					user1.setUsername(userPhone);
+					user1.setPassword(userPhone);                            
+				    Object obj = rest.postForEntity("http://a1.easemob.com/1113190815243420/lzapp/users", user1, Object.class);
+					System.out.println(obj.toString());
+				} catch (Exception e) {
+					e.printStackTrace();
+					rj.setResultCode("4005");//手机号被占用
+					rj.setResultMess("环信注册失败");
+					return rj;
+				}
+		
 		int num = userSer.register(userPhone, mobileId, pwd);
 		if(num==1){
 			rj.setResultCode("1001");//成功
@@ -197,7 +212,6 @@ public class RegisterApi {
 		    Object obj = rest.postForEntity("http://a1.easemob.com/1113190815243420/lzapp/users", user1, Object.class);
 			System.out.println(obj.toString());
 		} catch (Exception e) {
-			System.out.println("400错误==============="+e.getMessage());
 			e.printStackTrace();
 			rj.setResultCode("4004");//手机号被占用
 			rj.setResultMess("环信注册失败");

@@ -22,7 +22,7 @@
 	String code = request.getParameter("resultCode");
 	String mess = "";
 	if ("1001".equals(code)) {
-		mess = "恭喜注册成功！";
+		mess = "恭喜注册成功！请下载app登录.";
 	} else if ("4002".equals(code)) {
 		mess = "验证码错误或者超过三分钟！";
 	} else if ("4003".equals(code)) {
@@ -40,6 +40,10 @@
 	<div class="mui-content">
 		<div class="register">
 			<h1 style="font-size: 30px"><%=mess %></h1>
+		</div>
+		<div align="center">
+			<a href="https://dibaqu.com/6beq"><img src="images/ios.png"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="https://www.pgyer.com/UpMs"><img src="images/android.png"/></a>
 		</div>
 	</div>
 </body>

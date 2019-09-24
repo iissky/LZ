@@ -1,7 +1,12 @@
 package com.controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,5 +44,45 @@ public class WeightController {
 	public void addWeight(BigDecimal totallimit,BigDecimal ratio,BigDecimal perlimit){
 		System.out.println("ssss");
 		weightSer.addWeight(totallimit, ratio, perlimit);
+	}
+	@RequestMapping("/changeWeightStatus")
+	public String changeWeightStatus(String status,String weightid){
+		weightSer.changeWeightStatus(weightid, status);
+		return "redirect:weightListPage";
+	}
+	@RequestMapping("/weightConvertMess")
+	public String weightConvertMess(Map model){
+		String path = this.getClass().getResource("/").getPath();
+		InputStream in;
+		try {
+			in = new FileInputStream(path+"/gameset.properties");
+			Properties p = new Properties();
+			p.load(in);
+			in.close();
+			model.put("weightMess", p.getProperty("weightMess"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "weightMess";
+	}
+	
+	@RequestMapping("/setWeightConvertMess")
+	public String setWeightConvertMess(String mess){
+		String path = this.getClass().getResource("/").getPath();
+		InputStream in;
+		try {
+			in = new FileInputStream(path+"/gameset.properties");
+			Properties p = new Properties();
+			p.load(in);
+			in.close();
+			
+			FileOutputStream out = new FileOutputStream(path+"/gameset.properties");
+			p.setProperty("weightMess", mess);
+			
+			p.store(out, "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:weightConvertMess";
 	}
 }

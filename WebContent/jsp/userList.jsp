@@ -67,7 +67,7 @@
                                 <c:forEach items="${pb.list }" var="user">
                                   <tr>
                                     <td>${user.userid }</td>
-                                    <td>${user.username }</td>
+                                    <td>${user.usercode }</td>
                                     <td>${user.idcard }</td>
                                     <td>${user.phone }</td>
                                     <td>${user.balance }</td>
@@ -78,9 +78,9 @@
 <!--                                       <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;"> -->
 <!--                                         <i class="layui-icon">&#xe642;</i> -->
 <!--                                       </a> -->
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
+<!--                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"> -->
+<!--                                         <i class="layui-icon">&#xe640;</i> -->
+<!--                                       </a> -->
                                     </td>
                                   </tr>
                                   </c:forEach>

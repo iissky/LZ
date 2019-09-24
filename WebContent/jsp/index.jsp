@@ -115,23 +115,28 @@
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>权重轮次列表</cite></a>
                             </li>
-                        </ul>
-                    </li>
-                    <!-- 
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="资讯管理">&#xe726;</i>
-                            <cite>资讯管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('资讯列表','admin-list.html')">
+                                <a onclick="xadmin.add_tab('权限兑换开放提示信息','weightConvertMess')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>资讯列表</cite></a>
+                                    <cite>权限兑换开放提示信息</cite></a>
                             </li>
                         </ul>
                     </li>
-                     -->
+                    
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="公告管理">&#xe726;</i>
+                            <cite>公告管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('公告列表','notice/noticeList')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>公告列表</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- 
                     <li>
                         <a href="javascript:;">

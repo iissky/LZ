@@ -1,6 +1,10 @@
 package com.api;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,8 +55,13 @@ public class MoneyToWeightApi {
 		try{
 			LzWeightset lw = weightSer.findCurrentWeight();
 			if(lw==null){//当前没有开饭兑换轮次
+				String path = this.getClass().getResource("/").getPath();
+				InputStream in = new FileInputStream(path + "/gameset.properties");
+				Properties p = new Properties();
+				p.load(in);
 				mwj.setResultCode("4002");
-				mwj.setResultMess("当前没有开饭兑换轮次");
+				mwj.setResultMess(p.getProperty("weightMess"));
+				in.close();
 				return mwj;
 			}else{
 				//获取当前手机当前轮次总兑换权重总数

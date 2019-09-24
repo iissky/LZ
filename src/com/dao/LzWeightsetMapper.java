@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Update;
 import com.pojo.LzWeightset;
 
 public interface LzWeightsetMapper {
+	@Update("update lz_weightset set status=#{status} where weiid=#{weightid}")
+	public int changeWeightStatus(@Param("weightid") String weightid,@Param("status") String status);
 	
 	@Select("${sql}")
 	public List<LzWeightset> selectBySql(@Param("sql") String sql);

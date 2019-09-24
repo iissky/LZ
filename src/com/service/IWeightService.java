@@ -37,4 +37,12 @@ public interface IWeightService {
 	 * @return 1.成功  0.失败
 	 */
 	public int dialWeightOrder(String phone,BigDecimal weight);
+	
+	/**
+	 * 修改权重兑换状态
+	 * @param weightid
+	 * @param status
+	 * @return
+	 */
+	public int changeWeightStatus(String weightid,String status);
 }

@@ -119,4 +119,9 @@ public class WeightService implements IWeightService{
 		return 0;
 	}
 
+	@Override
+	public int changeWeightStatus(String weightid, String status) {
+		return weightMapper.changeWeightStatus(weightid, status);
+	}
+
 }

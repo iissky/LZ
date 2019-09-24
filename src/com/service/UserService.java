@@ -139,18 +139,23 @@ public class UserService implements IUserService{
 		}
 		//邀请用户奖励
 		List<LzUserinfo> inviteList = userMapper.selectBySql("select * from lz_userinfo where usercode='"+inviteUserCode+"'");
+		String invitePhone = "";
+		String isaward="0";
 		if(inviteList!=null&&inviteList.size()>0){
 			LzUserinfo inviteUser = inviteList.get(0);
+			invitePhone = inviteUser.getPhone();
 			if(inviteUser.getInvitenum()!=null&&inviteUser.getInvitenum()>=5){//邀请人数超过5个，奖励抽奖码一次
-				LzActivecode la = new LzActivecode();
-				la.setActivecode(UUID.randomUUID().toString().replace("-", "").substring(0, 20));
-				la.setBindphone(inviteUser.getPhone());
-				la.setStatus("1");
-				la.setCreatetype("1");
-				la.setCreatetime(new Date());
-				activeMapper.insert(la);
-			}else{//否则权重加10
-				inviteUser.setWeight(inviteUser.getWeight().add(new BigDecimal(10)));
+				//换触发器解决
+//				LzActivecode la = new LzActivecode();
+//				la.setActivecode(UUID.randomUUID().toString().replace("-", "").substring(0, 20));
+//				la.setBindphone(inviteUser.getPhone());
+//				la.setStatus("1");
+//				la.setCreatetype("1");
+//				la.setCreatetime(new Date());
+//				activeMapper.insert(la);
+			}else{//否则权重加2
+				isaward="1";
+				inviteUser.setWeight(inviteUser.getWeight().add(new BigDecimal(2)));
 			}
 			if(inviteUser.getInvitenum()==null){
 				inviteUser.setInvitenum(1);
@@ -167,6 +172,8 @@ public class UserService implements IUserService{
 		user.setBalance(new BigDecimal(0));
 		user.setWeight(new BigDecimal(10));
 		user.setStatus("1");
+		user.setInvitephone(invitePhone);
+		user.setIsaward(isaward);
 		return userMapper.insert(user);
 	}
 	
